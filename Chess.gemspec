@@ -5,11 +5,11 @@ require_relative "lib/Chess/version"
 Gem::Specification.new do |spec|
   spec.name = "Chess"
   spec.version = Chess::VERSION
-  spec.authors = ["MarinaTkachenko2006"]
+  spec.authors = ["MarinaTkachenko2006", "BorisBritva572", "CyanCactus4"]
   spec.email = ["tkachenkomari2006@gmai.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "A website to play chess"
+  spec.description = "A website to play chess on one device"
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/MarinaTkachenko2006/Chess"
   spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
