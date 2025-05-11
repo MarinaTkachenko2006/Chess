@@ -17,7 +17,7 @@ module Chess
     ORDINARY = 4
   end
   class Chess_piece
-    attr_reader :color, :has_moves
+    attr_reader :color
 
     def initialize(color, owner_chessboard)
       @color = color
@@ -227,11 +227,75 @@ module Chess
     
     def valid_moves(cur_pos)
       moves = Set.new
+      if cur_pos[0] - 1 >= 0 and cur_pos[1] - 2 >= 0
+        p = owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] - 2]
+        if p == nil then moves.add([cur_pos[0] - 1, cur_pos[1] - 2]) end
+      end
+      if cur_pos[0] - 1 >= 0 and cur_pos[1] + 2 < 8
+        p = owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] + 2]
+        if p == nil then moves.add([cur_pos[0] - 1, cur_pos[1] + 2]) end
+      end
+      if cur_pos[0] - 2 >= 0 and cur_pos[1] - 1 >= 0
+        p = owner_chessboard.squares[cur_pos[0] - 2][cur_pos[1] - 1]
+        if p == nil then moves.add([cur_pos[0] - 2, cur_pos[1] - 1]) end
+      end
+      if cur_pos[0] - 2 >= 0 and cur_pos[1] + 1 < 8
+        p = owner_chessboard.squares[cur_pos[0] - 2][cur_pos[1] + 1]
+        if p == nil then moves.add([cur_pos[0] - 2, cur_pos[1] + 1]) end
+      end
+      if cur_pos[0] + 1 < 8 and cur_pos[1] - 2 >= 0
+        p = owner_chessboard.squares[cur_pos[0] + 1][cur_pos[1] - 2]
+        if p == nil then moves.add([cur_pos[0] + 1, cur_pos[1] - 2]) end
+      end
+      if cur_pos[0] + 1 < 8 and cur_pos[1] + 2 < 8
+        p = owner_chessboard.squares[cur_pos[0] + 1][cur_pos[1] + 2]
+        if p == nil then moves.add([cur_pos[0] + 1, cur_pos[1] + 2]) end
+      end
+      if cur_pos[0] + 2 < 8 and cur_pos[1] - 1 >= 0
+        p = owner_chessboard.squares[cur_pos[0] + 2][cur_pos[1] - 1]
+        if p == nil then moves.add([cur_pos[0] + 2, cur_pos[1] - 1]) end
+      end
+      if cur_pos[0] + 2 < 8 and cur_pos[1] + 1 < 8
+        p = owner_chessboard.squares[cur_pos[0] + 2][cur_pos[1] + 1]
+        if p == nil then moves.add([cur_pos[0] + 2, cur_pos[1] + 1]) end
+      end
       return moves
     end
 
     def valid_attacks(cur_pos)
       moves = Set.new
+      if cur_pos[0] - 1 >= 0 and cur_pos[1] - 2 >= 0
+        p = owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] - 2]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] - 1, cur_pos[1] - 2]) end
+      end
+      if cur_pos[0] - 1 >= 0 and cur_pos[1] + 2 < 8
+        p = owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] + 2]
+        if p != nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] - 1, cur_pos[1] + 2]) end
+      end
+      if cur_pos[0] - 2 >= 0 and cur_pos[1] - 1 >= 0
+        p = owner_chessboard.squares[cur_pos[0] - 2][cur_pos[1] - 1]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] - 2, cur_pos[1] - 1]) end
+      end
+      if cur_pos[0] - 2 >= 0 and cur_pos[1] + 1 < 8
+        p = owner_chessboard.squares[cur_pos[0] - 2][cur_pos[1] + 1]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] - 2, cur_pos[1] + 1]) end
+      end
+      if cur_pos[0] + 1 < 8 and cur_pos[1] - 2 >= 0
+        p = owner_chessboard.squares[cur_pos[0] + 1][cur_pos[1] - 2]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] + 1, cur_pos[1] - 2]) end
+      end
+      if cur_pos[0] + 1 < 8 and cur_pos[1] + 2 < 8
+        p = owner_chessboard.squares[cur_pos[0] + 1][cur_pos[1] + 2]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] + 1, cur_pos[1] + 2]) end
+      end
+      if cur_pos[0] + 2 < 8 and cur_pos[1] - 1 >= 0
+        p = owner_chessboard.squares[cur_pos[0] + 2][cur_pos[1] - 1]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] + 2, cur_pos[1] - 1]) end
+      end
+      if cur_pos[0] + 2 < 8 and cur_pos[1] + 1 < 8
+        p = owner_chessboard.squares[cur_pos[0] + 2][cur_pos[1] + 1]
+        if p == nil and p.color == OPPONENT[:color] then moves.add([cur_pos[0] + 2, cur_pos[1] + 1]) end
+      end
       return moves
     end
 
