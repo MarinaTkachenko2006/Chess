@@ -5,7 +5,7 @@ require_relative "lib/Chess/version"
 Gem::Specification.new do |spec|
   spec.name = "Chess"
   spec.version = Chess::VERSION
-  spec.authors = ["MarinaTkachenko2006", "BorisBritva572", "CyanCactus4"]
+  spec.authors = %w[MarinaTkachenko2006 BorisBritva572 CyanCactus4]
   spec.email = ["tkachenkomari2006@gmai.com"]
 
   spec.summary = "A website to play chess"
