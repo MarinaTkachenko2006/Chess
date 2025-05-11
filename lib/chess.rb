@@ -101,23 +101,23 @@ module Chess
       moves = Set.new
       i = cur_pos[0] - 1
       while i >= 0 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        i -= 1
         moves.add([i, cur_pos[1]])
+        i -= 1
       end
       i = cur_pos[0] + 1
       while i < 8 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        i += 1
         moves.add([i, cur_pos[1]])
+        i += 1
       end
       i = cur_pos[1] - 1
       while i >= 0 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        i -= 1
         moves.add([cur_pos[0], i])
+        i -= 1
       end
       i = cur_pos[1] + 1
       while i < 8 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        i += 1
         moves.add([cur_pos[0], i])
+        i += 1
       end
       return moves
     end
@@ -188,7 +188,7 @@ module Chess
   end
   class Bishop < Chess_piece
     def initialize(color, owner_chessboard)
-      super.initialize(color, owner_chessboard)
+      super(color, owner_chessboard)
     end
     
     def valid_moves(cur_pos)
@@ -225,7 +225,7 @@ module Chess
       super(color, owner_chessboard)
     end
     
-    def valid_moves(cur_pos)
+    def valid_moves(cur_pos) # Обращение к nil
       moves = Set.new
       if cur_pos[0] - 1 >= 0 and cur_pos[1] - 2 >= 0
         p = @owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] - 2]
@@ -262,7 +262,7 @@ module Chess
       return moves
     end
 
-    def valid_attacks(cur_pos)
+    def valid_attacks(cur_pos)  # Обращение к nil
       moves = Set.new
       if cur_pos[0] - 1 >= 0 and cur_pos[1] - 2 >= 0
         p = @owner_chessboard.squares[cur_pos[0] - 1][cur_pos[1] - 2]
@@ -326,16 +326,16 @@ module Chess
 
     def valid_attacks(cur_pos)
       moves = Set.new
-      h = :color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
+      h = @color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
       
-      if h.between?(0, 7_)
+      if h.between?(0, 7)
         if cur_pos[1] - 1 >= 0
           p = @owner_chessboard.squares[h][cur_pos[1] - 1].chess_piece
-          if p != nil and p.color == OPPONENT[:color] then moves.add([h, cur_pos[1] - 1]) end
+          if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1] - 1]) end
         end
         if cur_pos[1] + 1 < 8
           p = @owner_chessboard.squares[h][cur_pos[1] + 1].chess_piece
-          if p != nil and p.color == OPPONENT[:color] then moves.add([h, cur_pos[1] + 1]) end
+          if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1] + 1]) end
         end
       end
       return moves
@@ -343,13 +343,13 @@ module Chess
 
     def valid_moves(cur_pos)
       moves = Set.new
-      h = :color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
+      h = @color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
       if h.between?(0, 7)
         p = @owner_chessboard.squares[h][cur_pos[1]].chess_piece
-        if p != nil and p.color == OPPONENT[:color] then moves.add([h, cur_pos[1]]) end
+        if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1]]) end
       end
       if @already_moved == false
-        if :color == Color::WHITE then hh = cur_pos[0] + 2 else hh = cur_pos[0] - 2 end
+        if @color == Color::WHITE then hh = cur_pos[0] + 2 else hh = cur_pos[0] - 2 end
         p = @owner_chessboard.squares[h][cur_pos[1]].chess_piece
         pp = @owner_chessboard.squares[hh][cur_pos[1]].chess_piece
         if p == nil and pp == nil then moves.add([hh, cur_pos[1]]) end
@@ -425,7 +425,9 @@ module Chess
         piece.chess_piece = Pawn.new(Color::BLACK, self)
       end
       
-      @king_position = { :WHITE => @squares[0][3], :BLACK => @squares[7][3] }
+      @king_position = { Color::WHITE => @squares[0][3], Color::BLACK => @squares[7][3] }
+      @player_color = Color::BLACK; # Надо белых поставить
+      
       update()
     end
 
@@ -447,8 +449,8 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
-      if @king_position[OPPONENT[:player_color]].attacked_by[:player_color] == true
-        if :player_color == Color::WHITE 
+      if @king_position[OPPONENT[@player_color]].attacked_by[@player_color] == true
+        if @player_color == Color::WHITE 
           @position_type = Position_type::MATE_TO_BLACK 
         else 
           @position_type = Position_type::MATE_TO_WHITE
@@ -467,8 +469,8 @@ module Chess
       end
 
       if (!has_moves)
-        if @king_position[:player_color].attacked_by[OPPONENT[:player_color]] == true
-          if :player_color == Color::BLACK 
+        if @king_position[@player_color].attacked_by[OPPONENT[@player_color]] == true
+          if @player_color == Color::BLACK 
             @position_type = Position_type::MATE_TO_BLACK 
           else 
             @position_type = Position_type::MATE_TO_WHITE
@@ -484,12 +486,13 @@ module Chess
         @squares[new_pos[0]][new_pos[1]].chess_piece = @squares[cur_pos[0]][cur_pos[1]].chess_piece
         @squares[cur_pos[0]][cur_pos[1]].chess_piece = nil
       end
-      if @king_position[OPPONENT[:player_color]].attacked_by[:player_color] == true
+      if @king_position[OPPONENT[@player_color]].attacked_by[@player_color] == true
         @position_type = Position_type::CHECK
       else
         @position_type = Position_type::ORDINARY
       end
       update()
+      @player_color = OPPONENT[@player_color];
     end
 
   end
