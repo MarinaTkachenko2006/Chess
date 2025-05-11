@@ -24,17 +24,75 @@ module Chess
       @owner_chessboard = owner_chessboard
     end
   end
-  class King < Chess_piese
+  class King < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
     end
+
+    def valid_moves(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def valid_attacks(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def capture?(cur_pos, new_pos)
+      return valid_attacks(cur_pos).include(new_pos)
+    end
+
+    def occupy?(cur_pos, new_pos)
+      return valid_moves(cur_pos).include(new_pos)
+    end
+
+    def step_valid?(cur_pos, new_pos)
+      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+    end
+
+    def make_step(cur_pos, new_pos)
+    end
+
+    def has_moves?(cur_pos)
+      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+    end
   end
-  class Queen < Chess_piese
+  class Queen < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
     end
+    
+    def valid_moves(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def valid_attacks(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def capture?(cur_pos, new_pos)
+      return valid_attacks(cur_pos).include(new_pos)
+    end
+
+    def occupy?(cur_pos, new_pos)
+      return valid_moves(cur_pos).include(new_pos)
+    end
+
+    def step_valid?(cur_pos, new_pos)
+      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+    end
+
+    def make_step(cur_pos, new_pos)
+    end
+
+    def has_moves?(cur_pos)
+      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+    end
   end
-  class Rook < Chess_piese
+  class Rook < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
     end
@@ -128,17 +186,75 @@ module Chess
       return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
     end
   end
-  class Bishop < Chess_piese
+  class Bishop < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
     end
+    
+    def valid_moves(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def valid_attacks(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def capture?(cur_pos, new_pos)
+      return valid_attacks(cur_pos).include(new_pos)
+    end
+
+    def occupy?(cur_pos, new_pos)
+      return valid_moves(cur_pos).include(new_pos)
+    end
+
+    def step_valid?(cur_pos, new_pos)
+      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+    end
+
+    def make_step(cur_pos, new_pos)
+    end
+
+    def has_moves?(cur_pos)
+      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+    end
   end
-  class Knight < Chess_piese
+  class Knight < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
     end
+    
+    def valid_moves(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def valid_attacks(cur_pos)
+      moves = Set.new
+      return moves
+    end
+
+    def capture?(cur_pos, new_pos)
+      return valid_attacks(cur_pos).include(new_pos)
+    end
+
+    def occupy?(cur_pos, new_pos)
+      return valid_moves(cur_pos).include(new_pos)
+    end
+
+    def step_valid?(cur_pos, new_pos)
+      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+    end
+
+    def make_step(cur_pos, new_pos)
+    end
+
+    def has_moves?(cur_pos)
+      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+    end
   end
-  class Pawn < Chess_piese
+  class Pawn < Chess_piece
     def initialize(color, owner_chessboard)
       super.initialize(color, owner_chessboard)
       @already_moved = false
@@ -298,6 +414,7 @@ module Chess
       else
         @position_type = Position_type::ORDINARY
       end
+      update()
     end
   end
   class Chess
