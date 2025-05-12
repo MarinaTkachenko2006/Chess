@@ -27,35 +27,81 @@ module Chess
   class King < Chess_piece
     def initialize(color, owner_chessboard)
       super(color, owner_chessboard)
+      @already_moved = false
     end
 
     def valid_moves(cur_pos)
       moves = Set.new
+      directions = [
+        [-1, -1], [0, -1], 
+        [1, -1], [1, 0], 
+        [1, 1], [0, 1], 
+        [-1, 1], [-1, 0]
+      ]
+
+      directions.each do |dx, dy|
+        new_x = cur_pos[0] + dx
+        new_y = cur_pos[1] + dy
+        if new_x.between?(0, 7) && new_y.between?(0, 7)
+          if !@owner_chessboard.squares[new_x][new_y].attacked_by[OPPONENT[:color]]
+            p = @owner_chessboard.squares[new_x][new_y].chess_piece
+            moves.add([new_x, new_y]) if p.nil? || p.color != self.color
+          end
+        end
+      end
+      if !@already_moved
+        h = @color == Color::WHITE ? 0 : 7
+        r1 = @owner_chessboard.squares[h][0].chess_piece
+        r2 = @owner_chessboard.squares[h][7].chess_piece
+        if r1.is_a?(Rook) && !r1.already_moved && !@owner_chessboard.squares[h][2].attacked_by[OPPONENT[:color]] && !@owner_chessboard.squares[h][1].attacked_by[OPPONENT[:color]]
+          moves.add([h, 1]) if @owner_chessboard.squares[h][2].chess_piece.nil? && @owner_chessboard.squares[h][1].chess_piece.nil?
+        end
+        if r2.is_a?(Rook) && !r2.already_moved && !@owner_chessboard.squares[h][5].attacked_by[OPPONENT[:color]] && !@owner_chessboard.squares[h][4].attacked_by[OPPONENT[:color]]
+          moves.add([h, 5]) if @owner_chessboard.squares[h][5].chess_piece.nil? && @owner_chessboard.squares[h][4].chess_piece.nil? && @owner_chessboard.squares[h][6].chess_piece.nil?
+        end
+      end
       return moves
     end
 
     def valid_attacks(cur_pos)
       moves = Set.new
+      directions = [
+        [-1, -1], [0, -1], 
+        [1, -1], [1, 0], 
+        [1, 1], [0, 1], 
+        [-1, 1], [-1, 0]
+      ]
+
+      directions.each do |dx, dy|
+        new_x = cur_pos[0] + dx
+        new_y = cur_pos[1] + dy
+        if new_x.between?(0, 7) && new_y.between?(0, 7)
+          if !@owner_chessboard.squares[new_x][new_y].attacked_by[OPPONENT[:color]]
+            p = @owner_chessboard.squares[new_x][new_y].chess_piece
+            moves.add([new_x, new_y]) if p.nil? || p.color != self.color
+          end
+        end
+      end
       return moves
     end
 
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include?(new_pos)
-    end
 
-    def occupy?(cur_pos, new_pos)
+    def step_valid?(cur_pos, new_pos)
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
-    end
-
     def make_step(cur_pos, new_pos)
+      @already_moved = true
+      if new_pos[1] - cur_pos[1] == 2
+        @owner_chessboard.make_step([cur_pos[0], 7], cur_pos[0], 4)
+      end
+      if new_pos[1] - cur_pos[1] == -2
+        @owner_chessboard.make_step([cur_pos[0], 0], cur_pos[0], 2)
+      end
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Queen < Chess_piece
@@ -65,36 +111,117 @@ module Chess
     
     def valid_moves(cur_pos)
       moves = Set.new
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1] + i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1] - i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1] + i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1] - i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0]
+        new_y = cur_pos[1] + i
+        if new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0]
+        new_y = cur_pos[1] - i
+        if new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1]
+        if new_x.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1]
+        if new_x.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
       return moves
     end
 
     def valid_attacks(cur_pos)
-      moves = Set.new
-      return moves
-    end
-
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include?(new_pos)
-    end
-
-    def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include?(new_pos)
+      return valid_moves(cur_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def make_step(cur_pos, new_pos)
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Rook < Chess_piece
+    attr_reader :already_moved
     def initialize(color, owner_chessboard)
       super(color, owner_chessboard)
+      @already_moved = false
     end
 
     def valid_moves(cur_pos)
@@ -155,6 +282,7 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
+      @already_moved = true
     end
 
     def has_moves?(cur_pos)
@@ -252,7 +380,6 @@ module Chess
           moves.add([new_x, new_y]) if p.nil? || p.color != self.color
         end
       end
-      
       return moves
     end
 
