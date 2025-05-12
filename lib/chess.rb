@@ -111,91 +111,27 @@ module Chess
     
     def valid_moves(cur_pos)
       moves = Set.new
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1] + i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1] - i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1] + i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1] - i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0]
-        new_y = cur_pos[1] + i
-        if new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0]
-        new_y = cur_pos[1] - i
-        if new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1]
-        if new_x.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1]
-        if new_x.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
+      directions = [
+        [ [-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7] ],
+        [ [-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7] ],
+        [ [1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7] ],
+        [ [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7] ],
+        [ [0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7] ],
+        [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7] ],
+        [ [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0] ],
+        [ [-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0] ]
+      ]
+      directions.each do |arr|
+        arr.each do |dx, dy|
+          new_x = cur_pos[0] + dx
+          new_y = cur_pos[1] + dy
+          if new_x.between?(0, 7) && new_y.between?(0, 7)
+            p = @owner_chessboard.squares[new_x][new_y].chess_piece
+            moves.add([new_x, new_y]) if p.nil?
+            if !p.nil? 
+              moves.add([new_x, new_y]) if p.color != self.color
+              break
+            end
           end
         end
       end
@@ -226,47 +162,23 @@ module Chess
 
     def valid_moves(cur_pos)
       moves = Set.new
-      for i in (1..7)
-        new_x = cur_pos[0]
-        new_y = cur_pos[1] + i
-        if new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0]
-        new_y = cur_pos[1] - i
-        if new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1]
-        if new_x.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1]
-        if new_x.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
+      directions = [
+        [ [0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7] ],
+        [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7] ],
+        [ [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0] ],
+        [ [-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0] ]
+      ]
+      directions.each do |arr|
+        arr.each do |dx, dy|
+          new_x = cur_pos[0] + dx
+          new_y = cur_pos[1] + dy
+          if new_x.between?(0, 7) && new_y.between?(0, 7)
+            p = @owner_chessboard.squares[new_x][new_y].chess_piece
+            moves.add([new_x, new_y]) if p.nil?
+            if !p.nil?
+              moves.add([new_x, new_y]) if p.color != self.color
+              break
+            end
           end
         end
       end
@@ -296,47 +208,23 @@ module Chess
     
     def valid_moves(cur_pos)
       moves = Set.new
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1] + i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] + i
-        new_y = cur_pos[1] - i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1] + i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
-          end
-        end
-      end
-      for i in (1..7)
-        new_x = cur_pos[0] - i
-        new_y = cur_pos[1] - i
-        if new_x.between(0, 7) && new_y.between(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p.nil? then moves.add([new_x, new_y]) else 
-            moves.add([new_x, new_y]) if p.color != self.color
-            break 
+      directions = [
+        [ [-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7] ],
+        [ [-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7] ],
+        [ [1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7] ],
+        [ [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7] ]
+      ]
+      directions.each do |arr|
+        arr.each do |dx, dy|
+          new_x = cur_pos[0] + dx
+          new_y = cur_pos[1] + dy
+          if new_x.between?(0, 7) && new_y.between?(0, 7)
+            p = @owner_chessboard.squares[new_x][new_y].chess_piece
+            moves.add([new_x, new_y]) if p.nil?
+            if !p.nil? 
+              moves.add([new_x, new_y]) if p.color != self.color
+              break
+            end
           end
         end
       end
