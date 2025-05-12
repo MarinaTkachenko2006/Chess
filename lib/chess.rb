@@ -40,11 +40,11 @@ module Chess
     end
 
     def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
+      return valid_attacks(cur_pos).include?(new_pos)
     end
 
     def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
@@ -74,11 +74,11 @@ module Chess
     end
 
     def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
+      return valid_attacks(cur_pos).include?(new_pos)
     end
 
     def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
@@ -99,91 +99,66 @@ module Chess
 
     def valid_moves(cur_pos)
       moves = Set.new
-      i = cur_pos[0] - 1
-      while i >= 0 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        moves.add([i, cur_pos[1]])
-        i -= 1
+      for i in (1..7)
+        new_x = cur_pos[0]
+        new_y = cur_pos[1] + i
+        if new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
       end
-      i = cur_pos[0] + 1
-      while i < 8 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        moves.add([i, cur_pos[1]])
-        i += 1
+      for i in (1..7)
+        new_x = cur_pos[0]
+        new_y = cur_pos[1] - i
+        if new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
       end
-      i = cur_pos[1] - 1
-      while i >= 0 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        moves.add([cur_pos[0], i])
-        i -= 1
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1]
+        if new_x.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
       end
-      i = cur_pos[1] + 1
-      while i < 8 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        moves.add([cur_pos[0], i])
-        i += 1
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1]
+        if new_x.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
       end
       return moves
     end
 
     def valid_attacks(cur_pos)
-      moves = Set.new
-      i = cur_pos[0] - 1
-      while i >= 0 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        i -= 1
-      end
-      if i >= 0
-        p = @owner_chessboard.squares[i][cur_pos[1]].chess_piece
-        if p != nil and p.color == OPPONENT[:color]
-          moves.add([i, cur_pos[1]])
-        end
-      end
-      i = cur_pos[0] + 1
-      while i < 8 and @owner_chessboard.squares[i][cur_pos[1]].chess_piece == nil
-        i += 1
-      end
-      if i < 8
-        p = @owner_chessboard.squares[i][cur_pos[1]].chess_piece
-        if p != nil and p.color == OPPONENT[:color]
-          moves.add([i, cur_pos[1]])
-        end
-      end
-      i = cur_pos[1] - 1
-      while i >= 0 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        i -= 1
-      end
-      if i >= 0
-        p = @owner_chessboard.squares[cur_pos[0]][i].chess_piece
-        if p != nil and p.color == OPPONENT[:color]
-          moves.add([cur_pos[0], i])
-        end
-      end
-      i = cur_pos[1] + 1
-      while i < 8 and @owner_chessboard.squares[cur_pos[0]][i].chess_piece == nil
-        i += 1
-      end
-      if i < 8
-        p = @owner_chessboard.squares[cur_pos[0]][i].chess_piece
-        if p != nil and p.color == OPPONENT[:color]
-          moves.add([cur_pos[0], i])
-        end
-      end
-      return moves
-    end
-
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
-    end
-
-    def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
+      return valid_moves(cur_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def make_step(cur_pos, new_pos)
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Bishop < Chess_piece
@@ -193,31 +168,66 @@ module Chess
     
     def valid_moves(cur_pos)
       moves = Set.new
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1] + i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] + i
+        new_y = cur_pos[1] - i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1] + i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
+      for i in (1..7)
+        new_x = cur_pos[0] - i
+        new_y = cur_pos[1] - i
+        if new_x.between(0, 7) && new_y.between(0, 7)
+          p = @owner_chessboard.squares[new_x][new_y].chess_piece
+          if p.nil? then moves.add([new_x, new_y]) else 
+            moves.add([new_x, new_y]) if p.color != self.color
+            break 
+          end
+        end
+      end
       return moves
     end
 
     def valid_attacks(cur_pos)
-      moves = Set.new
-      return moves
-    end
-
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
-    end
-
-    def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
+      return valid_moves(cur_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def make_step(cur_pos, new_pos)
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Knight < Chess_piece
@@ -239,7 +249,7 @@ module Chess
         new_y = cur_pos[1] + dy
         if new_x.between?(0, 7) && new_y.between?(0, 7)
           p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          moves.add([new_x, new_y]) if p.nil?
+          moves.add([new_x, new_y]) if p.nil? || p.color != self.color
         end
       end
       
@@ -247,44 +257,18 @@ module Chess
     end
 
     def valid_attacks(cur_pos)  # Обращение к nil
-      moves = Set.new
-            directions = [
-        [-1, -2], [-1, 2], 
-        [-2, -1], [-2, 1], 
-        [1, -2], [1, 2], 
-        [2, -1], [2, 1]
-      ]
-
-      directions.each do |dx, dy|
-        new_x = cur_pos[0] + dx
-        new_y = cur_pos[1] + dy
-        if new_x.between?(0, 7) && new_y.between?(0, 7)
-          p = @owner_chessboard.squares[new_x][new_y].chess_piece
-          if p && p.color != self.color
-            moves.add([new_x, new_y])
-          end
-        end
-      end
-      return moves
-    end
-
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
-    end
-
-    def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
+      return valid_moves(cur_pos)
     end
 
     def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def make_step(cur_pos, new_pos)
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Pawn < Chess_piece
@@ -296,16 +280,9 @@ module Chess
     def valid_attacks(cur_pos)
       moves = Set.new
       h = @color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
-      
       if h.between?(0, 7)
-        if cur_pos[1] - 1 >= 0
-          p = @owner_chessboard.squares[h][cur_pos[1] - 1].chess_piece
-          if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1] - 1]) end
-        end
-        if cur_pos[1] + 1 < 8
-          p = @owner_chessboard.squares[h][cur_pos[1] + 1].chess_piece
-          if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1] + 1]) end
-        end
+        moves.add([h, cur_pos[1] - 1]) if cur_pos[1] - 1 >= 0
+        moves.add([h, cur_pos[1] + 1]) if cur_pos[1] + 1 < 8
       end
       return moves
     end
@@ -315,7 +292,15 @@ module Chess
       h = @color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
       if h.between?(0, 7)
         p = @owner_chessboard.squares[h][cur_pos[1]].chess_piece
-        if p != nil and p.color == OPPONENT[@color] then moves.add([h, cur_pos[1]]) end
+        if p.nill? then moves.add([h, cur_pos[1]]) end
+          if cur_pos[1] - 1 >= 0
+            p = @owner_chessboard.squares[h][cur_pos[1] - 1].chess_piece
+            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] - 1]) end
+          end
+          if cur_pos[1] + 1 < 8
+            p = @owner_chessboard.squares[h][cur_pos[1] + 1].chess_piece
+            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] + 1]) end
+          end
       end
       if @already_moved == false
         if @color == Color::WHITE then hh = cur_pos[0] + 2 else hh = cur_pos[0] - 2 end
@@ -326,16 +311,8 @@ module Chess
       return moves
     end
 
-    def capture?(cur_pos, new_pos)
-      return valid_attacks(cur_pos).include(new_pos)
-    end
-
-    def occupy?(cur_pos, new_pos)
-      return valid_moves(cur_pos).include(new_pos)
-    end
-
     def step_valid?(cur_pos, new_pos)
-      return (capture?(cur_pos, new_pos) or occupy?(cur_pos, new_pos))
+      return valid_moves(cur_pos).include?(new_pos)
     end
 
     def make_step(cur_pos, new_pos)
@@ -343,7 +320,7 @@ module Chess
     end
 
     def has_moves?(cur_pos)
-      return (valid_moves(cur_pos).size > 0 or valid_attacks(cur_pos).size > 0)
+      return (valid_moves(cur_pos).size > 0)
     end
   end
   class Square
@@ -450,8 +427,8 @@ module Chess
         return
       end
       # Здесь будет ошибка, т.к. @squares[new_pos[0]][new_pos[1]].chess_piece == nil
-      if @squares[new_pos[0]][new_pos[1]].chess_piece.step_valid?(cur_pos, new_pos)
-        @squares[new_pos[0]][new_pos[1]].chess_piece.make_step(cur_pos, new_pos)
+      if @squares[cur_pos[0]][cur_pos[1]].chess_piece.step_valid?(cur_pos, new_pos)
+        @squares[cur_pos[0]][cur_pos[1]].chess_piece.make_step(cur_pos, new_pos)
         @squares[new_pos[0]][new_pos[1]].chess_piece = @squares[cur_pos[0]][cur_pos[1]].chess_piece
         @squares[cur_pos[0]][cur_pos[1]].chess_piece = nil
       end
