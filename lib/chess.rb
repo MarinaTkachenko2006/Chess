@@ -92,11 +92,14 @@ module Chess
 
     def make_step(cur_pos, new_pos)
       @already_moved = true
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
       if new_pos[1] - cur_pos[1] == 2
-        @owner_chessboard.make_step([cur_pos[0], 7], cur_pos[0], 4)
+        @squares[cur_pos[0]][4].chess_piece = @squares[cur_pos[0]][7].chess_piece
+        @squares[cur_pos[0]][7].chess_piece = nil
       end
       if new_pos[1] - cur_pos[1] == -2
-        @owner_chessboard.make_step([cur_pos[0], 0], cur_pos[0], 2)
+        @squares[cur_pos[0]][2].chess_piece = @squares[cur_pos[0]][0].chess_piece
+        @squares[cur_pos[0]][0].chess_piece = nil
       end
     end
 
@@ -147,6 +150,7 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
     def has_moves?(cur_pos)
@@ -195,6 +199,7 @@ module Chess
 
     def make_step(cur_pos, new_pos)
       @already_moved = true
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
     def has_moves?(cur_pos)
@@ -240,6 +245,7 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
     def has_moves?(cur_pos)
@@ -280,6 +286,7 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
     def has_moves?(cur_pos)
@@ -310,11 +317,33 @@ module Chess
         if p.nill? then moves.add([h, cur_pos[1]]) end
           if cur_pos[1] - 1 >= 0
             p = @owner_chessboard.squares[h][cur_pos[1] - 1].chess_piece
-            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] - 1]) end
+            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] - 1]) 
+            else 
+              pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] - 1].chess_piece
+              if p.is_nil? && !pp.is_nil? && pp.color != self.color
+                if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] - 1]
+                  moves.add([h, cur_pos[1] - 1])
+                end
+                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0]][cur_pos[1] - 1]
+                  moves.add([h, cur_pos[1] - 1])
+                end
+              end
+            end
           end
           if cur_pos[1] + 1 < 8
             p = @owner_chessboard.squares[h][cur_pos[1] + 1].chess_piece
-            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] + 1]) end
+            if p != nil and p.color != self.color then moves.add([h, cur_pos[1] + 1])
+            else 
+              pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] + 1].chess_piece
+              if p.is_nil? && !pp.is_nil? && pp.color != self.color
+                if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] + 1]
+                  moves.add([h, cur_pos[1] + 1])
+                end
+                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0]][cur_pos[1] + 1]
+                  moves.add([h, cur_pos[1] + 1])
+                end
+              end
+            end
           end
       end
       if @already_moved == false
@@ -332,6 +361,13 @@ module Chess
 
     def make_step(cur_pos, new_pos)
       @already_moved = true
+      if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
+      if (new_pos[1]-cur_pos[1]).abs == 2
+        if @color == Color::WHITE then @owner_chessboard.white_pawn = new_pos else @owner_chessboard.black_pawn = new_pos end
+      end
+      if (new_pos[1]-cur_pos[1]).abs == 1 && @owner_chessboard.squares[new_pos[0]][new_pos[1]].chess_piece.is_nil?
+        @owner_chessboard.squares[cur_pos[0]][new_pos[1]] = nil
+      end
     end
 
     def has_moves?(cur_pos)
@@ -347,13 +383,14 @@ module Chess
     end
   end
   class Chessboard
-    attr_accessor :squares
+    attr_accessor :squares, :white_pawn, :black_pawn
 
     attr_reader :king_position, :position_type, :player_color
 
     def initialize
       # Инициализация шахматной сетки
-
+      @white_pawn = nil
+      @black_pawn = nil
       @squares = Array.new(8) { Array.new(8) { Square.new } }
 
       # Инициализация белых фигур
@@ -387,7 +424,7 @@ module Chess
       end
       
       @king_position = { Color::WHITE => @squares[0][3], Color::BLACK => @squares[7][3] }
-      @player_color = Color::BLACK; # Надо белых поставить
+      @player_color = Color::WHITE; # Надо белых поставить
       
       update()
     end
@@ -446,6 +483,13 @@ module Chess
         @squares[cur_pos[0]][cur_pos[1]].chess_piece.make_step(cur_pos, new_pos)
         @squares[new_pos[0]][new_pos[1]].chess_piece = @squares[cur_pos[0]][cur_pos[1]].chess_piece
         @squares[cur_pos[0]][cur_pos[1]].chess_piece = nil
+        if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a(Pawn)
+          h = @color == Color::WHITE ? 7 : 0
+          if new_pos[0] == h
+            @squares[new_pos[0]][new_pos[1]].chess_piece = Queen.new(h == 7 ? Color::WHITE : Color::BLACK , self)
+          end
+        end
+        
       end
       if @king_position[OPPONENT[@player_color]].attacked_by[@player_color] == true
         @position_type = Position_type::CHECK
