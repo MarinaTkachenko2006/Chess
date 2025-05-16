@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "Chess/version"
+# require_relative "Chess/version"
 
 module Chess
   class Error < StandardError; end
@@ -90,16 +90,23 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
+
       @already_moved = true
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
+      
+      # Рокировка (сдвижение ладьи)
       if new_pos[1] - cur_pos[1] == 2
-        @squares[cur_pos[0]][4].chess_piece = @squares[cur_pos[0]][7].chess_piece
-        @squares[cur_pos[0]][7].chess_piece = nil
+        @owner_chessboard.squares[cur_pos[0]][4].chess_piece = @owner_chessboard.squares[cur_pos[0]][7].chess_piece
+        @owner_chessboard.squares[cur_pos[0]][7].chess_piece = nil
+        old_coords << [cur_pos[0], 7]
+        new_coords << [cur_pos[0], 4]
       end
       if new_pos[1] - cur_pos[1] == -2
-        @squares[cur_pos[0]][2].chess_piece = @squares[cur_pos[0]][0].chess_piece
-        @squares[cur_pos[0]][0].chess_piece = nil
+        @owner_chessboard.squares[cur_pos[0]][2].chess_piece = @owner_chessboard.squares[cur_pos[0]][0].chess_piece
+        @owner_chessboard.squares[cur_pos[0]][0].chess_piece = nil
+        old_coords << [cur_pos[0], 0]
+        new_coords << [cur_pos[0], 2]
       end
     end
 
@@ -124,6 +131,9 @@ module Chess
         [ [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0] ],
         [ [-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0] ]
       ]
+
+      # МАРИНА, УМНИЧКА
+
       directions.each do |arr|
         arr.each do |dx, dy|
           new_x = cur_pos[0] + dx
@@ -149,7 +159,7 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
@@ -197,7 +207,7 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
       @already_moved = true
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
@@ -244,7 +254,7 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
@@ -257,7 +267,7 @@ module Chess
       super(color, owner_chessboard)
     end
     
-    def valid_moves(cur_pos) # Обращение к nil
+    def valid_moves(cur_pos)
       moves = Set.new
       directions = [
         [-1, -2], [-1, 2], 
@@ -277,7 +287,7 @@ module Chess
       return moves
     end
 
-    def valid_attacks(cur_pos)  # Обращение к nil
+    def valid_attacks(cur_pos)
       return valid_moves(cur_pos)
     end
 
@@ -285,7 +295,7 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
     end
 
@@ -314,13 +324,13 @@ module Chess
       h = @color == Color::WHITE ? cur_pos[0] + 1 : cur_pos[0] - 1
       if h.between?(0, 7)
         p = @owner_chessboard.squares[h][cur_pos[1]].chess_piece
-        if p.nill? then moves.add([h, cur_pos[1]]) end
+        if p.nil? then moves.add([h, cur_pos[1]]) end
           if cur_pos[1] - 1 >= 0
             p = @owner_chessboard.squares[h][cur_pos[1] - 1].chess_piece
             if p != nil and p.color != self.color then moves.add([h, cur_pos[1] - 1]) 
             else 
               pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] - 1].chess_piece
-              if p.is_nil? && !pp.is_nil? && pp.color != self.color
+              if p.nil? && !pp.nil? && pp.color != self.color
                 if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] - 1]
                   moves.add([h, cur_pos[1] - 1])
                 end
@@ -335,7 +345,7 @@ module Chess
             if p != nil and p.color != self.color then moves.add([h, cur_pos[1] + 1])
             else 
               pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] + 1].chess_piece
-              if p.is_nil? && !pp.is_nil? && pp.color != self.color
+              if p.nil? && !pp.nil? && pp.color != self.color
                 if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] + 1]
                   moves.add([h, cur_pos[1] + 1])
                 end
@@ -359,14 +369,20 @@ module Chess
       return valid_moves(cur_pos).include?(new_pos)
     end
 
-    def make_step(cur_pos, new_pos)
+    def make_step(cur_pos, new_pos, old_coords, new_coords)
       @already_moved = true
+
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
+        
       if (new_pos[1]-cur_pos[1]).abs == 2
         if @color == Color::WHITE then @owner_chessboard.white_pawn = new_pos else @owner_chessboard.black_pawn = new_pos end
       end
-      if (new_pos[1]-cur_pos[1]).abs == 1 && @owner_chessboard.squares[new_pos[0]][new_pos[1]].chess_piece.is_nil?
-        @owner_chessboard.squares[cur_pos[0]][new_pos[1]] = nil
+
+      # Захват на проходе
+      if (new_pos[1]-cur_pos[1]).abs == 1 && @owner_chessboard.squares[new_pos[0]][new_pos[1]].chess_piece.nil?
+        old_coords << [cur_pos[0], new_pos[1]]
+        new_coords << [nil, nil]
+        @owner_chessboard.squares[cur_pos[0]][new_pos[1]].chess_piece = nil
       end
     end
 
@@ -384,6 +400,8 @@ module Chess
   end
   class Chessboard
     attr_accessor :squares, :white_pawn, :black_pawn
+    # white_pawn - координаты последней ходившей белой пешки до хода любой другой белой фигуры
+    # black_pawn - координаты последней ходившей чёрной пешки до хода любой другой чёрной фигуры
 
     attr_reader :king_position, :position_type, :player_color
 
@@ -424,7 +442,7 @@ module Chess
       end
       
       @king_position = { Color::WHITE => @squares[0][3], Color::BLACK => @squares[7][3] }
-      @player_color = Color::WHITE; # Надо белых поставить
+      @player_color = Color::WHITE;
       
       update()
     end
@@ -433,7 +451,7 @@ module Chess
       (0..7).each do |i|
         (0..7).each do |j|
           square = @squares[i][j]
-          next if square.chess_piece.nil? 
+          next if square&.chess_piece.nil? 
 
           piece = square.chess_piece
 
@@ -447,6 +465,7 @@ module Chess
     end
 
     def make_step(cur_pos, new_pos)
+      # Проверка на окончание игры
       if @king_position[OPPONENT[@player_color]].attacked_by[@player_color] == true
         if @player_color == Color::WHITE 
           @position_type = Position_type::MATE_TO_BLACK 
@@ -470,26 +489,44 @@ module Chess
         if @king_position[@player_color].attacked_by[OPPONENT[@player_color]] == true
           if @player_color == Color::BLACK 
             @position_type = Position_type::MATE_TO_BLACK 
-          else 
+          else # ШАХ И МАТЫ
             @position_type = Position_type::MATE_TO_WHITE
           end
-        else 
+        else # ПАД
           @position_type = Position_type::STALEMATE
         end
         return
       end
-      # Здесь будет ошибка, т.к. @squares[new_pos[0]][new_pos[1]].chess_piece == nil
+
+      old_coordinates = []
+      new_coordinates = []
+      # Передаём эти массивы в методы make_step фигур
+      
       if @squares[cur_pos[0]][cur_pos[1]].chess_piece.step_valid?(cur_pos, new_pos)
-        @squares[cur_pos[0]][cur_pos[1]].chess_piece.make_step(cur_pos, new_pos)
+        old_coordinates << [cur_pos[0], cur_pos[1]]
+        new_coordinates << [new_pos[0], new_pos[1]]
+        
+        @squares[cur_pos[0]][cur_pos[1]].chess_piece.make_step(cur_pos, new_pos, old_coordinates, new_coordinates) # make_step может менять другие фигуры, а не только рассматриваемую
+        
         @squares[new_pos[0]][new_pos[1]].chess_piece = @squares[cur_pos[0]][cur_pos[1]].chess_piece
         @squares[cur_pos[0]][cur_pos[1]].chess_piece = nil
-        if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a(Pawn)
+
+        # Это лишнее
+        #old_coordinates << [new_pos[0], new_pos[1]]
+        #new_coordinates << [nil, nil]
+
+        #if  @squares[cur_pos[0]][cur_pos[1]].chess_piece.is_a?(King) # Обновление позиции короля
+        #  @king_position[@player_color] = @squares[new_pos[0]][new_pos[1]]
+        #end
+
+        if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a?(Pawn)
           h = @color == Color::WHITE ? 7 : 0
           if new_pos[0] == h
             @squares[new_pos[0]][new_pos[1]].chess_piece = Queen.new(h == 7 ? Color::WHITE : Color::BLACK , self)
           end
         end
-        
+
+        @player_color = OPPONENT[@player_color] # Перепихнули
       end
       if @king_position[OPPONENT[@player_color]].attacked_by[@player_color] == true
         @position_type = Position_type::CHECK
@@ -497,8 +534,41 @@ module Chess
         @position_type = Position_type::ORDINARY
       end
       update()
-      @player_color = OPPONENT[@player_color];
+      print_board()
+      return old_coordinates, new_coordinates
+
+      # Как передать frontend состояние доски?
     end
+
+  def print_board
+    puts "  +------------------------+"
+    (7).downto(0) do |row|
+      print "#{row + 1} |"
+      (0..7).each do |col|
+        square = @squares[row][col]
+        piece = square.chess_piece
+        if piece.nil?
+          print " . "
+        else
+          symbol = case piece
+                   when King then 'K'
+                   when Queen then 'Q'
+                   when Rook then 'R'
+                   when Bishop then 'B'
+                   when Knight then 'N'
+                   when Pawn then 'P'
+                   else '?'
+                   end
+          symbol = symbol.downcase if piece.color == Color::BLACK
+          print " #{symbol} "
+        end
+      end
+      puts "|"
+    end
+    puts "  +------------------------+"
+    puts "    a  b  c  d  e  f  g  h"
+  end
+
 
   end
   class Chess
