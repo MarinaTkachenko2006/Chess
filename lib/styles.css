@@ -1,0 +1,70 @@
+button{
+    color: black;
+
+    border-radius: 5px;
+
+    background-color: #87CEEB;
+}
+
+#chessBoard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    width: 400px;
+    height: 400px;
+}
+
+.square{
+    border: 1px solid black;
+
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.white{
+    background-color: white;
+}
+
+.gray{
+    background-color: gray;
+}
+
+.yellow{
+    background-color: yellow;
+}
+.beige{
+    background-color: beige;
+}
+
+.brown{
+    background-color: brown;
+}
+
+.green{
+    background-color: green;
+}
+
+.choosen{
+	background: #ffa700;
+	opacity: .3;
+}
+
+#colorThemes{
+	margin-left: 500px;
+    display: inline;
+}
+.chess-figure {
+    transition: transform 0.5s ease;
+    position: absolute;
+    font-size: 36px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
