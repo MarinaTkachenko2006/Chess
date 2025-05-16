@@ -1,6 +1,6 @@
 class ChessController < ApplicationController
   require_relative '../../lib/chess'
-  
+  skip_before_action :verify_authenticity_token, only: [:newGame]
   def initialize
     super
   end
@@ -17,6 +17,11 @@ class ChessController < ApplicationController
       av_mvs_arr=figure.valid_moves([x,y]).map{|xy|"#{xy[0]}-#{xy[1]}"}
     end
     render json:av_mvs_arr
+  end
+
+  def newGame
+    ChessGame.reset
+    render json:{message:"game succesfully restarted"},status: :ok
   end
 
 
