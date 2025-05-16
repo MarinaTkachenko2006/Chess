@@ -658,3 +658,81 @@ Processing by ChessController#availableMoves as */*
 Completed 200 OK in 692ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/moves?position=1-3" for 127.0.0.1 at 2025-05-16 19:41:11 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-3", "chess"=>{}}
+Completed 200 OK in 1054ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:41:16 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-3", "to"=>"3-3", "chess"=>{"from"=>"1-3", "to"=>"3-3"}}
+Completed 500 Internal Server Error in 537ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `split' for nil):
+  
+app/controllers/chess_controller.rb:24:in `makeMove'
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-16 19:42:37 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 967ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:42:39 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 503ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-3" for 127.0.0.1 at 2025-05-16 19:42:44 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-3", "chess"=>{}}
+Completed 200 OK in 532ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:42:45 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-3", "to"=>"4-3", "chess"=>{"from"=>"6-3", "to"=>"4-3"}}
+Completed 200 OK in 501ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=3-4" for 127.0.0.1 at 2025-05-16 19:42:47 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-4", "chess"=>{}}
+Completed 200 OK in 492ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:42:48 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-4", "to"=>"4-3", "chess"=>{"from"=>"3-4", "to"=>"4-3"}}
+Completed 200 OK in 494ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-16 19:42:52 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 535ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:42:53 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 595ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=4-3" for 127.0.0.1 at 2025-05-16 19:42:55 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"4-3", "chess"=>{}}
+Completed 200 OK in 436ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-16 19:42:56 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"4-3", "to"=>"5-4", "chess"=>{"from"=>"4-3", "to"=>"5-4"}}
+Completed 200 OK in 485ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
