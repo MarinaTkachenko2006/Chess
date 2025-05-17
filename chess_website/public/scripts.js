@@ -358,7 +358,17 @@ function moveMultipleFigures(old_coords_array, new_coords_array) {
         }, 10);
 
         setTimeout(() => {
-            toSquare.textContent = figure;
+            if (newPosition[0] === "7" && temp.textContent === "♙") {
+                toSquare.textContent = "♕";
+            } else if (newPosition[0] === "0" && temp.textContent === "♟") {
+                toSquare.textContent = "♛";
+            } else {
+                toSquare.textContent = figure;
+            }
+
+            console.log(newPosition[0])
+
+
             document.body.removeChild(temp);
 
             toSquare.dataset.color = fromSquare.dataset.color;
