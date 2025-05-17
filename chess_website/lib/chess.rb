@@ -375,7 +375,7 @@ module Chess
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
         
       if (new_pos[1]-cur_pos[1]).abs == 2
-        if @color == Color::WHITE then @owner_chessboard.white_pawn = new_pos else @owner_chessboard.black_pawn = new_pos end
+        if @color == Color::WHITE then @owner_chessboard.white_pawn = [new_pos[0]][new_pos[1]] else @owner_chessboard.black_pawn = [new_pos[0]][new_pos[1]] end
       end
 
       # Захват на проходе
@@ -402,13 +402,14 @@ module Chess
     attr_accessor :squares, :white_pawn, :black_pawn
     # white_pawn - координаты последней ходившей белой пешки до хода любой другой белой фигуры
     # black_pawn - координаты последней ходившей чёрной пешки до хода любой другой чёрной фигуры
-
+    
     attr_reader :king_position, :position_type, :player_color
 
-    def initialize
+    def initialize(id)
       # Инициализация шахматной сетки
       @white_pawn = nil
       @black_pawn = nil
+      @ID = id
       @squares = Array.new(8) { Array.new(8) { Square.new } }
 
       # Инициализация белых фигур
@@ -489,11 +490,14 @@ module Chess
         if @king_position[@player_color].attacked_by[OPPONENT[@player_color]] == true
           if @player_color == Color::BLACK 
             @position_type = Position_type::MATE_TO_BLACK 
+            Chess.end_game(id) #Это так работает??
           else # ШАХ И МАТЫ
             @position_type = Position_type::MATE_TO_WHITE
+            Chess.end_game(id)
           end
         else # ПАД
           @position_type = Position_type::STALEMATE
+          Chess.end_game(id)
         end
         return
       end
@@ -572,5 +576,27 @@ module Chess
 
   end
   class Chess
+    def initialize()
+      @games = Hash.new
+      @free_ids = Array.new
+      @min_unused_id = 0
+    end
+    def start_game()
+      if @free_ids.empty?
+        @games[@min_unused_id] = ChessGame.new   
+        @min_unused_id += 1
+      else
+        @games[@free_ids.pop] = ChessGame.new
+      end
+    end
+    def join_game(id)
+      @games[id]
+    end
+
+    def end_game(id) #вызывается(???) из класса доски в случаях мата или пата
+      @games[id] = nil
+      @free_ids.push(id)
+    end
+
   end
 end
