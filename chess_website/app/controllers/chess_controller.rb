@@ -1,14 +1,12 @@
 class ChessController < ApplicationController
   require_relative '../../lib/chess'
   skip_before_action :verify_authenticity_token, only: [:newGame,:makeMove]
-  def initialize
-    super
-  end
+  before_action :set_manager
 
   def availableMoves
     position = params[:position]
     x,y = position.split('-').map(&:to_i)
-    game = ChessGame.instance
+    game = @manager.get_game(params[:game_id])
     
     av_mvs_arr = []
     figure = game.squares[x][y].chess_piece
@@ -23,7 +21,7 @@ class ChessController < ApplicationController
     from,to = params[:from],params[:to]
     x0,y0 = from.split('-').map(&:to_i)
     x1,y1 = to.split('-').map(&:to_i)
-    game = ChessGame.instance
+    game = @manager.get_game(params[:game_id])
     
     figure = game.squares[x0][y0].chess_piece
     old,new = [],[]
@@ -35,10 +33,13 @@ class ChessController < ApplicationController
   end
 
   def newGame
-    ChessGame.reset
-    render json:{message:"game succesfully restarted"},status: :ok
+    id = @manager.create_game
+    render json: { id: id }
   end
 
+  private
 
-
+  def set_manager
+    @manager ||= ChessManager.instance
+  end
 end

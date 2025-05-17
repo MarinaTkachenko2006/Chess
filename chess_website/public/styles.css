@@ -156,11 +156,11 @@ button:hover {
 		0 2px 4px rgba(0, 0, 0, .2);
 }
 
-#gameTimer {
-	position: relative;
-	top: -10px;
-}
+#gameIdDisplay {
+	font-size: .9em;
 
+	color: #fff;
+}
 
 #currentPlayerDisplay {
 	font-size: .9em;

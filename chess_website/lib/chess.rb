@@ -331,10 +331,10 @@ module Chess
             else 
               pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] - 1].chess_piece
               if !pp.nil? && pp.color != @color
-                if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] - 1]
+                if pp.color == Color::WHITE && @owner_chessboard.black_pawn == [cur_pos[0], cur_pos[1] - 1]
                   moves.add([h, cur_pos[1] - 1])
                 end
-                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0]][cur_pos[1] - 1]
+                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0], cur_pos[1] - 1]
                   moves.add([h, cur_pos[1] - 1])
                 end
               end
@@ -346,10 +346,10 @@ module Chess
             else 
               pp = @owner_chessboard.squares[cur_pos[0]][cur_pos[1] + 1].chess_piece
               if p.nil? && !pp.nil? && pp.color != self.color
-                if pp.color == Color::WHITE && @owner_chessboard.white_pawn == [cur_pos[0]][cur_pos[1] + 1]
+                if pp.color == Color::WHITE && @owner_chessboard.black_pawn == [cur_pos[0], cur_pos[1] + 1]
                   moves.add([h, cur_pos[1] + 1])
                 end
-                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0]][cur_pos[1] + 1]
+                if pp.color == Color::BLACK && @owner_chessboard.black_pawn == [cur_pos[0], cur_pos[1] + 1]
                   moves.add([h, cur_pos[1] + 1])
                 end
               end
@@ -374,8 +374,8 @@ module Chess
 
       if @color == Color::WHITE then @owner_chessboard.black_pawn = nil else @owner_chessboard.white_pawn = nil end
         
-      if (new_pos[1]-cur_pos[1]).abs == 2
-        if @color == Color::WHITE then @owner_chessboard.white_pawn = [new_pos[0]][new_pos[1]] else @owner_chessboard.black_pawn = [new_pos[0]][new_pos[1]] end
+      if (new_pos[0]-cur_pos[0]).abs == 2
+        if @color == Color::WHITE then @owner_chessboard.white_pawn = [new_pos[0], new_pos[1]] else @owner_chessboard.black_pawn = [new_pos[0], new_pos[1]] end
       end
 
       # Захват на проходе
@@ -544,59 +544,28 @@ module Chess
       # Как передать frontend состояние доски?
     end
 
-  def print_board
-    puts "  +------------------------+"
-    (7).downto(0) do |row|
-      print "#{row + 1} |"
-      (0..7).each do |col|
-        square = @squares[row][col]
-        piece = square.chess_piece
-        if piece.nil?
-          print " . "
-        else
-          symbol = case piece
-                   when King then 'K'
-                   when Queen then 'Q'
-                   when Rook then 'R'
-                   when Bishop then 'B'
-                   when Knight then 'N'
-                   when Pawn then 'P'
-                   else '?'
-                   end
-          symbol = symbol.downcase if piece.color == Color::BLACK
-          print " #{symbol} "
-        end
-      end
-      puts "|"
-    end
-    puts "  +------------------------+"
-    puts "    a  b  c  d  e  f  g  h"
-  end
+  #class Chess
+  #  def initialize()
+  ##    @games = Hash.new
+   #   @free_ids = Array.new
+   #   @min_unused_id = 0
+   # end
+   # def start_game()
+   #  if @free_ids.empty?
+    #    @games[@min_unused_id] = ChessGame.new   
+     #   @min_unused_id += 1
+      #else
+     #   @games[@free_ids.pop] = ChessGame.new
+    #  end
+   # end
+   # def join_game(id)
+   #   @games[id]
+   # end
 
-
-  end
-  class Chess
-    def initialize()
-      @games = Hash.new
-      @free_ids = Array.new
-      @min_unused_id = 0
-    end
-    def start_game()
-      if @free_ids.empty?
-        @games[@min_unused_id] = ChessGame.new   
-        @min_unused_id += 1
-      else
-        @games[@free_ids.pop] = ChessGame.new
-      end
-    end
-    def join_game(id)
-      @games[id]
-    end
-
-    def end_game(id) #вызывается(???) из класса доски в случаях мата или пата
-      @games[id] = nil
-      @free_ids.push(id)
-    end
+    #def end_game(id) #вызывается(???) из класса доски в случаях мата или пата
+    #  @games[id] = nil
+    # @free_ids.push(id)
+    #end
 
   end
 end
