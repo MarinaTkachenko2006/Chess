@@ -1,7 +1,5 @@
-
 let selectedChessFigure = null; // Выбранная фигура
 let currentPlayer = 'white'; // Текущий игрок
-let currentGameId = null;
 
 document.getElementById('startButton').addEventListener('click', () => {
     startChessGame();
@@ -11,9 +9,37 @@ document.getElementById('colorThemeSelected').addEventListener('change', () => {
     setColorTheme();
 });
 
-document.getElementById('joinButton').addEventListener('click', joinChessGame);
-
 document.getElementById('restartButton').addEventListener('click', restartParty);
+
+function showGameStatus(status) {
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modal-message');
+
+    if (status === "мат") {
+        modalMessage.textContent = "Игра окончена! Мат!";
+    } else if (status === "шах") {
+        modalMessage.textContent = "Шах!";
+    } else if (status === "пат") {
+        modalMessage.textContent = "Игра окончена! Пат!";
+    } else if (status === "продолжение") {
+        return;
+    }
+
+    modal.style.display = "block"; // Показываем модальное окно
+
+    // Закрытие модального окна при нажатии на кнопку закрытия
+    const closeButton = document.querySelector('.close-button');
+    closeButton.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Закрытие модального окна при клике вне его
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 
 function restartParty() {
@@ -22,17 +48,20 @@ function restartParty() {
         headers: {
             "Content-Type": "application/json",
         },
-    }).then((response) => {
-        if (!response.ok)
-            throw new Error("Сетевая ошибка: " + response.status);
-        return response.json();
-    }).then((data) => {
-        startChessGame();
+    })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error("Сетевая ошибка: " + response.status);
+            return response.json();
+        })
+        .then((data) => {
+            startChessGame();
 
-    }).catch((error) => {
-        console.error("Ошибка при перезапуске уровня:", error);
-        alert("Произошла ошибка при перезапуске уровня");
-    });
+        })
+        .catch((error) => {
+            console.error("Ошибка при перезапуске уровня:", error);
+            alert("Произошла ошибка при перезапуске уровня");
+        });
 }
 
 
@@ -54,70 +83,25 @@ function setColorTheme() {
     });
 }
 
-
-function joinChessGame() {
-    const Id = document.getElementById('joinId').value.trim();
-    if (Id === '') {
-        alert('Пожалуйста, введите ID партии');
-        return;
-    }
-
-    currentGameId = Id;
-
-    fetch(`http://127.0.0.1:3000/join`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ game_id: Id }),
-    }).then(response => {
-        if (!response.ok)
-            throw new Error("Ошибка соединения");
-        return response.json();
-    }).then(data => {
-        /// TODO
-    }).catch(error => {
-        console.error("Ошибка", error);
-        alert("Ошибка при подключении к партии");
-    });
-}
-
-
 // Запуск шахматной партии
 function startChessGame() {
-    fetch(`http://127.0.0.1:3000/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", },
-    }).then(response => {
-        if (!response.ok)
-            throw new Error("Сетевая ошибка: " + response.status);
-        return response.json();
-    }).then(data => {
-        // Скрытие компонентов
-        document.getElementById('startButton').style.display = 'none';
-        document.getElementById('restartButton').style.display = 'none';
-        document.getElementById('joinButton').style.display = 'none';
-        document.getElementById('joinId').style.display = 'none';
+    // Скрытие компонентов
+    document.getElementById('startButton').style.display = 'none';
+    document.getElementById('restartButton').style.display = 'none';
 
+    // Появление компонентов
+    document.getElementById('currentPlayerDisplay').style.display = 'block';
+    document.getElementById('colorThemes').style.display = 'inline';
+    document.getElementById('resignButton').style.display = 'inline-block';
 
-        // Появление компонентов
-        document.getElementById('currentPlayerDisplay').style.display = 'block';
-        document.getElementById('colorThemes').style.display = 'inline';
-        document.getElementById('resignButton').style.display = 'inline-block';
+    spawnChessBoard();
+    spawnChessFigures();
+    updateCurrentPlayerDisplay();
+    document.getElementById('resignButton').addEventListener('click', () => { handleResign(); });
 
-        spawnChessBoard();
-        spawnChessFigures();
-        updateCurrentPlayerDisplay();
-        document.getElementById('resignButton').addEventListener('click', () => { handleResign(); });
+    currentPlayer = 'white';
 
-        currentPlayer = 'white';
-
-        currentGameId = data.id;
-        document.getElementById('gameId').textContent = currentGameId;
-        document.getElementById('gameIdDisplay').style.display = 'block';
-        console.log('Партия началась с ID:', currentGameId);
-    }).catch(error => {
-        console.error("Ошибка", error);
-        alert("Произошла ошибка при запуске партии");
-    })
+    console.log('Партия началась');
 }
 
 // Функция окончания игры (поднятия белого флага)
@@ -161,36 +145,36 @@ function spawnChessFigures() {
     const figures = {
 
         // Белые фигуры
-        '0-0': { symbol: '♖', color: 'white' }, '0-1': { symbol: '♘', color: 'white' },
-        '0-2': { symbol: '♗', color: 'white' }, '0-3': { symbol: '♕', color: 'white' },
-        '0-4': { symbol: '♔', color: 'white' }, '0-5': { symbol: '♗', color: 'white' },
-        '0-6': { symbol: '♘', color: 'white' }, '0-7': { symbol: '♖', color: 'white' },
+        '7-0': { symbol: '♖', color: 'white' }, '7-1': { symbol: '♘', color: 'white' },
+        '7-2': { symbol: '♗', color: 'white' }, '7-3': { symbol: '♕', color: 'white' },
+        '7-4': { symbol: '♔', color: 'white' }, '7-5': { symbol: '♗', color: 'white' },
+        '7-6': { symbol: '♘', color: 'white' }, '7-7': { symbol: '♖', color: 'white' },
 
         // Черные фигуры
-        '7-0': { symbol: '♜', color: 'black' }, '7-1': { symbol: '♞', color: 'black' },
-        '7-2': { symbol: '♝', color: 'black' }, '7-3': { symbol: '♛', color: 'black' },
-        '7-4': { symbol: '♚', color: 'black' }, '7-5': { symbol: '♝', color: 'black' },
-        '7-6': { symbol: '♞', color: 'black' }, '7-7': { symbol: '♜', color: 'black' },
+        '0-0': { symbol: '♜', color: 'black' }, '0-1': { symbol: '♞', color: 'black' },
+        '0-2': { symbol: '♝', color: 'black' }, '0-3': { symbol: '♛', color: 'black' },
+        '0-4': { symbol: '♚', color: 'black' }, '0-5': { symbol: '♝', color: 'black' },
+        '0-6': { symbol: '♞', color: 'black' }, '0-7': { symbol: '♜', color: 'black' },
 
         // Белые пешки (второй ряд)
-        '1-0': { symbol: '♙', color: "white" },
-        '1-1': { symbol: '♙', color: "white" },
-        '1-2': { symbol: '♙', color: "white" },
-        '1-3': { symbol: '♙', color: "white" },
-        '1-4': { symbol: '♙', color: "white" },
-        '1-5': { symbol: '♙', color: "white" },
-        '1-6': { symbol: '♙', color: "white" },
-        '1-7': { symbol: '♙', color: "white" },
+        '6-0': { symbol: '♙', color: "white" },
+        '6-1': { symbol: '♙', color: "white" },
+        '6-2': { symbol: '♙', color: "white" },
+        '6-3': { symbol: '♙', color: "white" },
+        '6-4': { symbol: '♙', color: "white" },
+        '6-5': { symbol: '♙', color: "white" },
+        '6-6': { symbol: '♙', color: "white" },
+        '6-7': { symbol: '♙', color: "white" },
 
         // Черные пешки (седьмой ряд)
-        '6-0': { symbol: '♟', color: 'black' },
-        '6-1': { symbol: '♟', color: 'black' },
-        '6-2': { symbol: '♟', color: 'black' },
-        '6-3': { symbol: '♟', color: 'black' },
-        '6-4': { symbol: '♟', color: 'black' },
-        '6-5': { symbol: '♟', color: 'black' },
-        '6-6': { symbol: '♟', color: 'black' },
-        '6-7': { symbol: '♟', color: 'black' }
+        '1-0': { symbol: '♟', color: 'black' },
+        '1-1': { symbol: '♟', color: 'black' },
+        '1-2': { symbol: '♟', color: 'black' },
+        '1-3': { symbol: '♟', color: 'black' },
+        '1-4': { symbol: '♟', color: 'black' },
+        '1-5': { symbol: '♟', color: 'black' },
+        '1-6': { symbol: '♟', color: 'black' },
+        '1-7': { symbol: '♟', color: 'black' }
     };
 
     const squares = document.querySelectorAll('.square');
@@ -240,17 +224,21 @@ function SelectChessFigure(position) {
     selectedSquare.classList.add('selected');
     selectedChessFigure = position;
 
-    fetch(`http://127.0.0.1:3000/moves?position=${position}&game_id=${currentGameId}`, {
+    fetch(`http://127.0.0.1:3000/moves?position=${position}`, {
         method: "GET",
-        headers: { "Content-Type": "application/json", },
-    }).then((response) => {
-        if (!response.ok)
-            throw new Error("Сетевая ошибка: " + response.status);
-        return response.json();
-    }).then((moves) => {
-        console.log("УСПЕХ: ", moves);
-        LightCell(moves);
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error("Сетевая ошибка: " + response.status);
+            return response.json();
+        })
+        .then((moves) => {
+            console.log("УСПЕХ: ", moves);
+            LightCell(moves);
+        })
         .catch((error) => {
             console.error("Ошибка: ", error);
             alert("Произошла ошибка при получении допустимых ходов");
@@ -298,21 +286,25 @@ function moveChessFigure(from, to) {
         body: JSON.stringify({
             from: from,
             to: to,
-            game_id: currentGameId
         }),
-    }).then(response => {
-        if (!response.ok)
-            throw new Error('Ошибка сети: ' + response.status);
-        return response.json();
-    }).then(data => {
-        console.log("OLD_COORDINATES: ", data.old_coordinates)
-        console.log("NEW_COORDINATES: ", data.new_coordinates)
+    })
+        .then(response => {
+            if (!response.ok)
+                throw new Error('Ошибка сети: ' + response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log("OLD_COORDINATES: ", data.old_coordinates);
+            console.log("NEW_COORDINATES: ", data.new_coordinates);
+            console.log("STATUS: ", data.status);
 
-        moveMultipleFigures(data.old_coordinates, data.new_coordinates);
-    }).catch(error => {
-        console.error('Ошибка:', error);
-        alert('Произошла ошибка при перемещении фигуры');
-    });
+            moveMultipleFigures(data.old_coordinates, data.new_coordinates);
+            showGameStatus(data.status);
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при перемещении фигуры');
+        });
 }
 
 function moveMultipleFigures(old_coords_array, new_coords_array) {
@@ -358,16 +350,13 @@ function moveMultipleFigures(old_coords_array, new_coords_array) {
         }, 10);
 
         setTimeout(() => {
-            if (newPosition[0] === "7" && temp.textContent === "♙") {
+            if (newPosition[0] === "0" && temp.textContent === "♙") {
                 toSquare.textContent = "♕";
-            } else if (newPosition[0] === "0" && temp.textContent === "♟") {
+            } else if (newPosition[0] === "7" && temp.textContent === "♟") {
                 toSquare.textContent = "♛";
             } else {
                 toSquare.textContent = figure;
             }
-
-            console.log(newPosition[0])
-
 
             document.body.removeChild(temp);
 
