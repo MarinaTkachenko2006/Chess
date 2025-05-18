@@ -1,37 +1,19 @@
-# Chess
+# Шахматы
+## Веб-сайт для игры в шахматы
+Добро пожаловать на веб-сайт игры в шахматы! Приложение использует современные веб-технологии, а также предлагает  удобный интерфейс, игровую механику в реальном времени.
 
-A website to play chess on one device
+## Функции
 
-## Installation
+- Стандартный функционал шахмат (возможность перемещать фигуры, ставить шах/мат, делать ракировку и т.д.)
+- Игровая механика в реальном времени с удобным интерфейсом
+- Визуальное обозначение допустимых ходов для конкретной фигуры
+- Возможность менять стиль доски
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+![изображение](https://github.com/user-attachments/assets/f02a34d8-a229-42b6-85ff-018785f1fabc)
 
-Install the gem and add to the application's Gemfile by executing:
+## Используемые технологии
 
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/MarinaTkachenko2006/Chess.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+- **HTML**: Для структурирования веб-страниц.
+- **CSS**: Для стилизации и оформления приложения.
+- **JavaScript**: Для интерактивных элементов и управления логикой игры.
+- **Ruby on Rails**: Для разработки серверной части, обработки взаимодействий с базой данных и обслуживания приложения.
