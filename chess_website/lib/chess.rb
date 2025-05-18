@@ -384,7 +384,7 @@ module Chess
   class Chessboard
     attr_accessor :squares, :last_double_moved_pawn
     
-    attr_reader :king_position, :player_color
+    attr_reader :king_position
 
     def initialize()
       # Инициализация шахматной сетки
@@ -422,7 +422,6 @@ module Chess
       end
       
       @king_position = { Color::WHITE => [7, 4], Color::BLACK => [0, 4] }
-      @player_color = Color::WHITE;
     end
 
     def make_step(cur_pos, new_pos)
@@ -446,9 +445,9 @@ module Chess
         #old_coordinates << [new_pos[0], new_pos[1]]
         #new_coordinates << [nil, nil]
 
-        if  @squares[cur_pos[0]][cur_pos[1]].chess_piece.is_a?(King) # Обновление позиции короля
-          @king_position[@player_color] = [new_pos[0], new_pos[1]]
-        end
+        #if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a?(King) # Обновление позиции короля
+        #  @king_position[@player_color] = [new_pos[0], new_pos[1]]
+        #end
 
         if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a?(Pawn)
           h = @squares[new_pos[0]][new_pos[1]].chess_piece.color == Color::WHITE ? 0 : 7
@@ -457,18 +456,15 @@ module Chess
           end
         end
 
-        status = if checkmate?(OPPONENT[@player_color])
+        status = if checkmate?(OPPONENT[piece.color])
             "мат"
-          elsif check?(OPPONENT[@player_color])
+          elsif check?(OPPONENT[piece.color])
             "шах"
-          elsif stalemate?(OPPONENT[@player_color])
+          elsif stalemate?(OPPONENT[piece.color])
             "пат"
           else
             "продолжение"
           end
-        
-          
-        @player_color = OPPONENT[@player_color] # Перепихнули
 
         return old_coordinates, new_coordinates, status
       end
@@ -495,8 +491,8 @@ module Chess
         #old_coordinates << [new_pos[0], new_pos[1]]
         #new_coordinates << [nil, nil]
 
-        if  @squares[cur_pos[0]][cur_pos[1]].chess_piece.is_a?(King) # Обновление позиции короля
-          @king_position[@player_color] = [new_pos[0], new_pos[1]]
+        if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a?(King) # Обновление позиции короля
+          @king_position[@squares[new_pos[0]][new_pos[1]].chess_piece.color] = [new_pos[0], new_pos[1]]
         end
 
         if  @squares[new_pos[0]][new_pos[1]].chess_piece.is_a?(Pawn)
@@ -505,8 +501,6 @@ module Chess
             @squares[new_pos[0]][new_pos[1]].chess_piece = Queen.new(h == 7 ? Color::WHITE : Color::BLACK , self)
           end
         end
-
-        @player_color = OPPONENT[@player_color] # Перепихнули
 
         return old_coordinates, new_coordinates
       end
