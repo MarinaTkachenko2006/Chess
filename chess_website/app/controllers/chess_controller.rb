@@ -11,7 +11,7 @@ class ChessController < ApplicationController
     figure = game.piece_at(x, y)
 
     if (!figure.nil?)
-      av_mvs_arr=figure.valid_moves([x, y]).map{|xy|"#{xy[0]}-#{xy[1]}"}
+      av_mvs_arr=figure.valid_check_moves([x, y]).map{|xy|"#{xy[0]}-#{xy[1]}"}
     end
     render json:av_mvs_arr
   end
@@ -35,7 +35,7 @@ class ChessController < ApplicationController
     ChessGame.reset
     render json:{message:"game succesfully restarted"}, status: :ok
   end
-  
+
 end
 
 class ChessGame

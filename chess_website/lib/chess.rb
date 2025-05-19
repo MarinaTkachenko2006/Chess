@@ -47,6 +47,16 @@ module Chess
     def has_moves?
       return true
     end
+
+    def move_causes_check?(cur_pos, new_pos)
+      board_copy = @owner_chessboard.clone_board
+      
+      return false unless step_valid?(cur_pos, new_pos)
+      
+      board_copy.make_unsafe_step(cur_pos, new_pos)
+      
+      return !board_copy.check?(@color)
+    end
   end
 
   # Класс Короля
@@ -88,6 +98,11 @@ module Chess
       end
 
       return moves
+    end
+
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
     end
 
     # Проверяет корректность хода
@@ -160,6 +175,12 @@ module Chess
       return moves
     end
 
+    
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
+    end
+
     def step_valid?(cur_pos, new_pos)
       return valid_moves(cur_pos).include?(new_pos)
     end
@@ -203,6 +224,12 @@ module Chess
 
       return moves
 
+    end
+
+    
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
     end
 
     def step_valid?(cur_pos, new_pos)
@@ -250,6 +277,12 @@ module Chess
 
     end
 
+    
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
+    end
+
     def step_valid?(cur_pos, new_pos)
       return valid_moves(cur_pos).include?(new_pos)
     end
@@ -286,6 +319,12 @@ module Chess
       end
 
       return moves
+    end
+
+    
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
     end
 
     def step_valid?(cur_pos, new_pos)
@@ -345,6 +384,12 @@ module Chess
       end
 
       return moves
+    end
+
+    
+    def valid_check_moves(cur_pos)
+      moves = valid_moves(cur_pos)
+      moves.select { |move| move_causes_check?(cur_pos, move) }
     end
 
     def step_valid?(cur_pos, new_pos)
