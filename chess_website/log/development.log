@@ -12636,3 +12636,761 @@ Completed 200 OK in 482ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cach
 Started POST "/move" for 127.0.0.1 at 2025-05-18 22:44:49 +0000
 Processing by ChessController#makeMove as */*
   Parameters: {"from"=>"0-2", "to"=>"2-4", "chess"=>{"from"=>"0-2", "to"=>"2-4"}}
+Completed 200 OK in 447ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:22:26 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 791ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:27 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 386ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:22:28 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 381ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:29 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 376ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:22:30 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 381ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:31 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"4-2", "chess"=>{"from"=>"7-5", "to"=>"4-2"}}
+Completed 200 OK in 394ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:22:32 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 398ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:33 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 389ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-3" for 127.0.0.1 at 2025-05-19 06:22:33 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-3", "chess"=>{}}
+Completed 200 OK in 385ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:34 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-3", "to"=>"3-7", "chess"=>{"from"=>"7-3", "to"=>"3-7"}}
+Completed 200 OK in 383ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-6" for 127.0.0.1 at 2025-05-19 06:22:35 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-6", "chess"=>{}}
+Completed 200 OK in 374ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:35 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-6", "to"=>"2-5", "chess"=>{"from"=>"0-6", "to"=>"2-5"}}
+Completed 200 OK in 382ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/moves?position=3-7" for 127.0.0.1 at 2025-05-19 06:22:36 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-7", "chess"=>{}}
+Completed 200 OK in 382ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:22:37 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-7", "to"=>"1-5", "chess"=>{"from"=>"3-7", "to"=>"1-5"}}
+Completed 200 OK in 343ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:22:55 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 783ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:00 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 400ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:23:02 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 313ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-3" for 127.0.0.1 at 2025-05-19 06:23:04 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-3", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:05 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-3", "to"=>"3-3", "chess"=>{"from"=>"1-3", "to"=>"3-3"}}
+Completed 200 OK in 378ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:23:06 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 320ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:07 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"3-1", "chess"=>{"from"=>"7-5", "to"=>"3-1"}}
+Completed 200 OK in 378ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-2" for 127.0.0.1 at 2025-05-19 06:23:09 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-2", "chess"=>{}}
+Completed 200 OK in 381ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:23:21 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 778ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:22 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 394ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:23:23 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 379ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:23 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 316ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:23:25 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 385ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:26 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"4-2", "chess"=>{"from"=>"7-5", "to"=>"4-2"}}
+Completed 200 OK in 386ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:23:26 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 382ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:27 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 353ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-3" for 127.0.0.1 at 2025-05-19 06:23:28 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-3", "chess"=>{}}
+Completed 200 OK in 387ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:29 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-3", "to"=>"3-7", "chess"=>{"from"=>"7-3", "to"=>"3-7"}}
+Completed 200 OK in 380ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-6" for 127.0.0.1 at 2025-05-19 06:23:29 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-6", "chess"=>{}}
+Completed 200 OK in 387ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:30 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-6", "to"=>"2-5", "chess"=>{"from"=>"0-6", "to"=>"2-5"}}
+Completed 200 OK in 383ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=3-7" for 127.0.0.1 at 2025-05-19 06:23:31 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-7", "chess"=>{}}
+Completed 200 OK in 383ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:23:31 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-7", "to"=>"1-5", "chess"=>{"from"=>"3-7", "to"=>"1-5"}}
+Completed 200 OK in 388ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:23:35 +0000
+  
+ActionController::RoutingError (No route matches [POST] "/restart"):
+  
+Started GET "/moves?position=7-2" for 127.0.0.1 at 2025-05-19 06:24:52 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:24:52 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-2", "chess"=>{}}
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 674ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 635ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:24:53 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 404ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:24:54 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:24:55 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 387ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:24:56 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 500 Internal Server Error in 370ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (uninitialized constant Chess::ChessBoard):
+  
+app/controllers/chess_controller.rb:49:in `reset'
+app/controllers/chess_controller.rb:35:in `newGame'
+Started GET "/moves?position=7-2" for 127.0.0.1 at 2025-05-19 06:26:01 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-2", "chess"=>{}}
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:26:02 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 693ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 644ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:03 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 397ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:26:03 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 382ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:04 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-0", "chess"=>{"from"=>"0-1", "to"=>"2-0"}}
+Completed 200 OK in 398ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:26:06 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 379ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:26:08 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 393ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:09 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 387ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:26:10 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 388ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:11 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-0", "chess"=>{"from"=>"0-1", "to"=>"2-0"}}
+Completed 200 OK in 390ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:26:14 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 362ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:26:18 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 384ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:19 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 384ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:26:20 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 396ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:20 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 385ms (Views: 1.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:26:21 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 369ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:30 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"4-2", "chess"=>{"from"=>"7-5", "to"=>"4-2"}}
+Completed 200 OK in 374ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:26:31 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 391ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:32 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 396ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-3" for 127.0.0.1 at 2025-05-19 06:26:32 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-3", "chess"=>{}}
+Completed 200 OK in 383ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:33 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-3", "to"=>"3-7", "chess"=>{"from"=>"7-3", "to"=>"3-7"}}
+Completed 200 OK in 388ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/moves?position=0-6" for 127.0.0.1 at 2025-05-19 06:26:34 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-6", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:34 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-6", "to"=>"2-5", "chess"=>{"from"=>"0-6", "to"=>"2-5"}}
+Completed 200 OK in 383ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/moves?position=3-7" for 127.0.0.1 at 2025-05-19 06:26:35 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-7", "chess"=>{}}
+Completed 200 OK in 384ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:26:36 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-7", "to"=>"1-5", "chess"=>{"from"=>"3-7", "to"=>"1-5"}}
+Completed 200 OK in 386ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:26:47 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 366ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:27:17 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 775ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:18 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 376ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:27:19 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 378ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:20 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 387ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:27:20 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 380ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:21 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"4-2", "chess"=>{"from"=>"7-5", "to"=>"4-2"}}
+Completed 200 OK in 377ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:27:22 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 378ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:23 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 389ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-3" for 127.0.0.1 at 2025-05-19 06:27:23 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-3", "chess"=>{}}
+Completed 200 OK in 384ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:24 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-3", "to"=>"3-7", "chess"=>{"from"=>"7-3", "to"=>"3-7"}}
+Completed 200 OK in 385ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-6" for 127.0.0.1 at 2025-05-19 06:27:25 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-6", "chess"=>{}}
+Completed 200 OK in 384ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:26 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-6", "to"=>"2-5", "chess"=>{"from"=>"0-6", "to"=>"2-5"}}
+Completed 200 OK in 393ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=3-7" for 127.0.0.1 at 2025-05-19 06:27:27 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-7", "chess"=>{}}
+Completed 200 OK in 395ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:27 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-7", "to"=>"1-5", "chess"=>{"from"=>"3-7", "to"=>"1-5"}}
+Completed 200 OK in 386ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.4ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:27:31 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 381ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:27:34 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 379ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:27:35 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 396ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:29:20 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 800ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:29:23 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 378ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:29:24 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 393ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:29:24 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 369ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:29:26 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-0", "chess"=>{"from"=>"0-1", "to"=>"2-0"}}
+Completed 200 OK in 375ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:29:27 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 389ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:29:28 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 333ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:29:31 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 370ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:29:31 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 374ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restart" for 127.0.0.1 at 2025-05-19 06:30:51 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+  
+ActionController::RoutingError (No route matches [POST] "/restart"):
+  
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:31:15 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 806ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:31:17 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:18 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 400ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:31:19 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 394ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:19 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-0", "chess"=>{"from"=>"0-1", "to"=>"2-0"}}
+Completed 200 OK in 387ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:31:21 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 381ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-1" for 127.0.0.1 at 2025-05-19 06:31:23 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-1", "chess"=>{}}
+Completed 200 OK in 382ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:24 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-1", "to"=>"5-2", "chess"=>{"from"=>"7-1", "to"=>"5-2"}}
+Completed 200 OK in 378ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:31:43 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ChessWebsite'*/[0m
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 793ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:31:46 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 384ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:47 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 410ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:31:49 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 379ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:50 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 378ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-5" for 127.0.0.1 at 2025-05-19 06:31:50 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-5", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:51 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-5", "to"=>"4-2", "chess"=>{"from"=>"7-5", "to"=>"4-2"}}
+Completed 200 OK in 383ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-1" for 127.0.0.1 at 2025-05-19 06:31:52 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-1", "chess"=>{}}
+Completed 200 OK in 372ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:53 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-1", "to"=>"2-2", "chess"=>{"from"=>"0-1", "to"=>"2-2"}}
+Completed 200 OK in 374ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=7-3" for 127.0.0.1 at 2025-05-19 06:31:53 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"7-3", "chess"=>{}}
+Completed 200 OK in 376ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:54 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"7-3", "to"=>"3-7", "chess"=>{"from"=>"7-3", "to"=>"3-7"}}
+Completed 200 OK in 374ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=0-6" for 127.0.0.1 at 2025-05-19 06:31:54 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"0-6", "chess"=>{}}
+Completed 200 OK in 374ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:55 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"0-6", "to"=>"2-5", "chess"=>{"from"=>"0-6", "to"=>"2-5"}}
+Completed 200 OK in 382ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=3-7" for 127.0.0.1 at 2025-05-19 06:31:56 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"3-7", "chess"=>{}}
+Completed 200 OK in 383ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:31:56 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"3-7", "to"=>"1-5", "chess"=>{"from"=>"3-7", "to"=>"1-5"}}
+Completed 200 OK in 388ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.8ms)
+
+
+Started POST "/start" for 127.0.0.1 at 2025-05-19 06:32:07 +0000
+Processing by ChessController#newGame as */*
+  Parameters: {"chess"=>{}}
+Completed 200 OK in 360ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/moves?position=6-4" for 127.0.0.1 at 2025-05-19 06:32:08 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"6-4", "chess"=>{}}
+Completed 200 OK in 375ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:32:09 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"6-4", "to"=>"4-4", "chess"=>{"from"=>"6-4", "to"=>"4-4"}}
+Completed 200 OK in 380ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/moves?position=1-4" for 127.0.0.1 at 2025-05-19 06:32:10 +0000
+Processing by ChessController#availableMoves as */*
+  Parameters: {"position"=>"1-4", "chess"=>{}}
+Completed 200 OK in 381ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/move" for 127.0.0.1 at 2025-05-19 06:32:11 +0000
+Processing by ChessController#makeMove as */*
+  Parameters: {"from"=>"1-4", "to"=>"3-4", "chess"=>{"from"=>"1-4", "to"=>"3-4"}}
+Completed 200 OK in 370ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+

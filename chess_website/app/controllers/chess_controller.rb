@@ -1,5 +1,5 @@
 class ChessController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:makeMove]
+  skip_before_action :verify_authenticity_token, only: [:makeMove, :newGame]
   require_relative '../../lib/chess'
 
   def availableMoves
@@ -30,6 +30,12 @@ class ChessController < ApplicationController
     end
     render json:{old_coordinates:old,new_coordinates:new, status: status}
   end
+
+  def newGame
+    ChessGame.reset
+    render json:{message:"game succesfully restarted"}, status: :ok
+  end
+  
 end
 
 class ChessGame
@@ -41,6 +47,6 @@ class ChessGame
   end
 
   def self.reset
-    @instance = Chess::ChessBoard.new
+    @instance = Chess::Chessboard.new
   end
 end

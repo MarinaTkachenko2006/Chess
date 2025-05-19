@@ -43,7 +43,7 @@ module Chess
       return true # TODO
     end
 
-    # Проверяет, есть у фигуры допустимые ходы
+    # Проверяет наличие допустимых ходов
     def has_moves?
       return true
     end
@@ -52,6 +52,7 @@ module Chess
   # Класс Короля
   class King < Chess_piece
 
+    # Возвращает допустимые ходы
     def valid_moves(cur_pos)
       moves = Set.new
       directions = [
@@ -89,10 +90,12 @@ module Chess
       return moves
     end
 
+    # Проверяет корректность хода
     def step_valid?(cur_pos, new_pos)
       return valid_moves(cur_pos).include?(new_pos)
     end
 
+    # Совершает ход
     def make_step(cur_pos, new_pos, old_coords, new_coords)
       @already_moved = true
       @owner_chessboard.last_double_moved_pawn = nil
@@ -114,7 +117,7 @@ module Chess
 
     end
 
-
+    # Проверяет наличие допустимых ходов
     def has_moves?(cur_pos)
       return valid_moves(cur_pos).size > 0
     end
@@ -424,6 +427,7 @@ module Chess
       @king_position = { Color::WHITE => [7, 4], Color::BLACK => [0, 4] }
     end
 
+    # Делает ход в учётом статуса игры
     def make_step(cur_pos, new_pos)
 
       old_coordinates = []
@@ -470,6 +474,7 @@ module Chess
       end
     end
 
+    # Делает ход без учёта статуса игры
     def make_unsafe_step(cur_pos, new_pos)
       
       old_coordinates = []
@@ -534,6 +539,7 @@ module Chess
       return square_under_attack?(king_position[0], king_position[1], OPPONENT[color])
     end
 
+    # Находит короля заданного цвета на шахмотной доске
     def find_king_position(color)
       (0..7).each do |r|
         (0..7).each do |c|
@@ -576,30 +582,6 @@ module Chess
       return true
     end
 
-    # Клонирование доски
-    def clone_board
-      puts "deep_clone_board"
-      
-      clone_board = Chess::Chessboard.new
-      clone_board.squares = Array.new(8) { Array.new(8) {Square.new} }
-      @squares.each_with_index do |row, r|
-        row.each_with_index do |square, c|
-          piece = square.chess_piece
-
-          if piece.nil?
-            clone_board.squares[r][c].chess_piece = nil
-          else
-            clone_piece = piece.class.new(piece.color, clone_board)
-            clone_piece.already_moved = piece.already_moved
-            clone_board.squares[r][c].chess_piece = clone_piece
-          end
-        end
-      end
-      clone_board.last_double_moved_pawn = @last_double_moved_pawn ? [*@last_double_moved_pawn] : nil
-
-      return clone_board
-    end
-
     # Проверят, поставлен ли пат
     def stalemate?(color)
       puts "stalemate?"
@@ -627,6 +609,7 @@ module Chess
       return true
     end
 
+    # Проверяет, находится ли клетка под атакой какой-либо фигуры
     def square_under_attack?(row, col, attacker_color=nil)
       puts "square_under_attack?"
       attacker_color ||= OPPONENT[@squares[row][col].chess_piece.try(:color)]
@@ -643,6 +626,30 @@ module Chess
       end
       
       return false
+    end
+
+    # Клонирование доски
+    def clone_board
+      puts "deep_clone_board"
+      
+      clone_board = Chess::Chessboard.new
+      clone_board.squares = Array.new(8) { Array.new(8) {Square.new} }
+      @squares.each_with_index do |row, r|
+        row.each_with_index do |square, c|
+          piece = square.chess_piece
+
+          if piece.nil?
+            clone_board.squares[r][c].chess_piece = nil
+          else
+            clone_piece = piece.class.new(piece.color, clone_board)
+            clone_piece.already_moved = piece.already_moved
+            clone_board.squares[r][c].chess_piece = clone_piece
+          end
+        end
+      end
+      clone_board.last_double_moved_pawn = @last_double_moved_pawn ? [*@last_double_moved_pawn] : nil
+
+      return clone_board
     end
 
   end

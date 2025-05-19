@@ -50,6 +50,12 @@ h1 {
 	/* Скругленные углы */
 }
 
+.blocked {
+	pointer-events: none;
+	opacity: 0.5;
+	/* Можно оставить прозрачность для визуальной подсказки */
+}
+
 .close-button {
 	color: #aaa;
 	float: right;
