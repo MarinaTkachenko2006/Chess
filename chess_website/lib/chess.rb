@@ -675,7 +675,7 @@ module Chess
 
     # Клонирование доски
     def clone_board
-      puts "deep_clone_board"
+      puts "clone_board"
       
       clone_board = Chess::Chessboard.new
       clone_board.squares = Array.new(8) { Array.new(8) {Square.new} }
