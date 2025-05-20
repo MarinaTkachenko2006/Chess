@@ -1,0 +1,38 @@
+<html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+	<h1>Шахматы</h1>
+	<button id="startButton">Начать партию</button>
+	<button id="restartButton" style="display: none;">Реванш</button>
+
+
+	<div id="chessBoard" style="display: none;"></div>
+
+	<div id="currentPlayerDisplay" style="display: none;">Текущий игрок: <span id="currentPlayerColor"></span></div>
+	<button id="resignButton" style="margin-top: 20px; display: none;">Сдаться 🏳</button>
+	<label id="colorThemes" style="display: none;">
+		Цветовая тема:
+		<select id="colorThemeSelected">
+			<option value="grayWhiteTheme">Серо-белая</option>
+			<option value="brownBeigeTheme">Коричнево-бежевая</option>
+			<option value="yellowGreenTheme">Жёлто-зелёная</option>
+			<option value="whitePurpleTheme">Бело-фиолетовая</option>
+		</select>
+	</label>
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span class="close-button">&times;</span>
+			<p id="modal-message"></p>
+		</div>
+	</div>
+	<script src="scripts.js"></script>
+</body>
+
+</html>
