@@ -1,8 +1,63 @@
+# Общие игнорируемые файлы и папки в корне репозитория
+
+# Бандлер
 /.bundle/
+
+# Документация Yardoc
 /.yardoc
 /_yardoc/
+
+# Отчёты покрытия тестами
 /coverage/
-/doc/
+
+# Документация, сгенерированная RDoc или Yard
+/ doc/
 /pkg/
-/spec/reports/
-/tmp/
+
+# Отчёты тестов RSpec или других тестовых фреймворков
+/ spec/reports/
+
+# Временные файлы и папки Rails (внутри проекта)
+/chess_website/tmp/
+/chess_website/log/*
+!/chess_website/log/.keep
+
+# Папки с PID файлами и сокетами Rails
+/chess_website/tmp/pids/*
+/chess_website/tmp/sockets/*
+
+# Файлы базы данных (локальные)
+/chess_website/db/*.sqlite3
+/chess_website/db/*.sqlite3-journal
+
+# Файлы баз данных PostgreSQL, MySQL (локальные)
+/chess_website/db/*.pgsql
+/chess_website/db/*.mysql
+
+# Папка хранения загруженных файлов (например, Active Storage)
+/chess_website/storage/*
+/chess_website/public/uploads
+
+# Файлы окружения и секреты
+/chess_website/.env
+/chess_website/.env.*.local
+
+# Node.js / Webpacker / Yarn (если используется)
+/chess_website/node_modules/
+/chess_website/yarn.lock
+
+# Скомпилированные ассеты Rails (если не используете precompile)
+/chess_website/public/assets
+/chess_website/public/packs
+
+# Системные файлы macOS, Windows и Linux
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE и редакторы (например, RubyMine, VSCode)
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
