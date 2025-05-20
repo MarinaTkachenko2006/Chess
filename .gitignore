@@ -1,63 +1,49 @@
-# Общие игнорируемые файлы и папки в корне репозитория
+# Ignore bundler config
+/.bundle
 
-# Бандлер
-/.bundle/
+# Ignore the default SQLite database
+/db/*.sqlite3
+/db/*.sqlite3-journal
 
-# Документация Yardoc
-/.yardoc
-/_yardoc/
+# Ignore uploaded files (e.g., Active Storage)
+ /storage
 
-# Отчёты покрытия тестами
+# Ignore log files and temp files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pid files and server socket
+/tmp/pids/*
+/tmp/sockets/*
+
+# Ignore byebug history file
+.byebug_history
+
+# Ignore RubyMine project files (если используете IDE)
+.idea/
+
+# Ignore VSCode settings (если используете VSCode)
+.vscode/
+
+# Ignore node modules (если есть frontend с npm/yarn)
+node_modules/
+
+# Ignore yarn lock file if you don't want to track it (обычно лучше оставить)
+# /yarn.lock
+
+# Ignore environment variables
+.env
+.env.*.local
+
+# Ignore secret credentials (если есть)
+config/master.key
+config/credentials.yml.enc
+
+# Ignore coverage reports (например, SimpleCov)
 /coverage/
 
-# Документация, сгенерированная RDoc или Yard
-/ doc/
-/pkg/
-
-# Отчёты тестов RSpec или других тестовых фреймворков
-/ spec/reports/
-
-# Временные файлы и папки Rails (внутри проекта)
-/chess_website/tmp/
-/chess_website/log/*
-!/chess_website/log/.keep
-
-# Папки с PID файлами и сокетами Rails
-/chess_website/tmp/pids/*
-/chess_website/tmp/sockets/*
-
-# Файлы базы данных (локальные)
-/chess_website/db/*.sqlite3
-/chess_website/db/*.sqlite3-journal
-
-# Файлы баз данных PostgreSQL, MySQL (локальные)
-/chess_website/db/*.pgsql
-/chess_website/db/*.mysql
-
-# Папка хранения загруженных файлов (например, Active Storage)
-/chess_website/storage/*
-/chess_website/public/uploads
-
-# Файлы окружения и секреты
-/chess_website/.env
-/chess_website/.env.*.local
-
-# Node.js / Webpacker / Yarn (если используется)
-/chess_website/node_modules/
-/chess_website/yarn.lock
-
-# Скомпилированные ассеты Rails (если не используете precompile)
-/chess_website/public/assets
-/chess_website/public/packs
-
-# Системные файлы macOS, Windows и Linux
+# Ignore other IDE configs or OS files
 .DS_Store
 Thumbs.db
-*.swp
-*.swo
-
-# IDE и редакторы (например, RubyMine, VSCode)
-.idea/
-.vscode/
-*.sublime-workspace
-*.sublime-project
